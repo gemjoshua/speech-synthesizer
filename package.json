@@ -16,7 +16,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/therealgemjosh/web-speech-api.git"
+    "url": "git+https://github.com/therealgemjosh/text-to-speech-converter.git"
   },
   "bugs": {
     "url": "https://github.com/therealgemjosh/web-speech-api/issues"
