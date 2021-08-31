@@ -1,0 +1,232 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+body {
+  background: #222;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  padding: 10px 0px;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+header .container .header_title {
+  font-family: "Helvetica";
+  font-size: 35px;
+  font-weight: 800;
+  color: #f9f8fa;
+  text-align: center;
+  padding: 16px 0px;
+}
+
+header .header_description {
+  font-size: 14;
+  font-weight: 600;
+  font-family: "Helvetica Now Display";
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+header .menu {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menu {
+  font-size: 13px;
+  font-weight: 400;
+  color: #444;
+  width: 100%;
+}
+.menu li {
+  margin: 2px 0px;
+  text-align: center;
+  width: 60%;
+}
+
+main {
+  min-height: calc(100vh - 200px);
+  width: 100%;
+}
+
+.animated {
+  width: 90%;
+  height: 200px;
+  background: url("myapp.gif");
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.8;
+  transition: background 100 ease;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  background: transparent;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.main_contents {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+#getTextForm {
+  width: 100%;
+  display: block;
+}
+#getTextForm textarea {
+  max-width: 90%;
+  min-width: 90%;
+  display: block;
+  min-height: 10em;
+  max-height: 20em;
+  margin: 0.5rem auto;
+}
+
+#getTextForm #text {
+  background: #ccc;
+  margin-top: 0 !important;
+}
+
+.rate,
+.pitch {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  margin: 1rem auto;
+  justify-content: space-between;
+}
+
+.adjuster {
+  flex: 5;
+  margin-left: 10px;
+}
+.pitch-header,
+.rate-header {
+  flex: 1;
+}
+
+.rate-header,
+.pitch-header {
+  flex: 1;
+  width: auto;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+}
+.rate-header > *,
+.pitch-header > * {
+  display: block;
+}
+
+.rate-value,
+.pitch-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: #ccc;
+  margin-left: 10px;
+}
+
+label {
+  font-family: Quicksand;
+  font-weight: 600;
+  font-size: 16px;
+  color: #f9f8fa;
+}
+
+#getTextForm #text {
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+#getTextForm #btn-submit {
+  text-transform: capitalize;
+  text-align: center;
+  background: #111;
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: 10px;
+  color: #ddd;
+}
+.form_footer > * {
+  display: block;
+  flex: 1;
+  margin-left: 10px;
+  padding: 0.5rem;
+}
+.form_footer {
+  padding: 0.5rem;
+  background-color: red;
+  width: 90%;
+  margin: 0.3rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_footer button {
+  border: 0;
+  font-size: 16px;
+  font-family: Quicksand;
+  font-weight: 600;
+}
+
+footer {
+  width: 100%;
+  bottom: 0;
+  height: 60px;
+  background: #333;
+  margin-top: 1rem;
+  font-size: small;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+footer .footer-container {
+  width: 80%;
+  margin: auto;
+  color: #ccc;
+  padding: 1rem 0;
+}
+
+@media screen and (max-width: 749px) {
+  main .container {
+    width: 100%;
+  }
+
+  .form_footer > * {
+    width: calc(100% / 3);
+    display: block;
+    margin-left: 10px;
+    padding: 0.5rem;
+  }
+  .main_contents {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
