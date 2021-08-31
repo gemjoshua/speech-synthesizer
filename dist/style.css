@@ -2,69 +2,104 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-#header .header-info{
-  color:#ddd;
-  text-align:center;
-  font-size: 14px;
+  overflow-x: hidden;
 }
 
 body {
   background: #222;
 }
 
-#header {
-  padding: 1.5rem 0;
-  background: #111;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  padding: 10px 0px;
 }
 
-#header h2 {
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+header .container .header_title {
+  font-family: "Helvetica";
+  font-size: 35px;
+  font-weight: 800;
+  color: #f9f8fa;
   text-align: center;
-  color: #ddd;
+  padding: 16px 0px;
+}
+
+header .header_description {
+  font-size: 14;
+  font-weight: 600;
+  font-family: "Helvetica Now Display";
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+header .menu {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menu {
+  font-size: 13px;
+  font-weight: 400;
+  color: #444;
+  width: 100%;
+}
+.menu li {
+  margin: 2px 0px;
+  text-align: center;
+  width: 60%;
+}
+
+main {
+  min-height: calc(100vh - 200px);
+  width: 100%;
 }
 
 .animated {
-  width: 70%;
+  width: 90%;
   height: 200px;
   background: url("myapp.gif");
   margin: auto;
   margin-top: 5px;
   margin-bottom: 0;
-  background-size: contain;
-  background-repeat: repeat-x;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   opacity: 0.8;
-  transition: opacity 0.5s ease-in-out;
+  transition: background 100 ease;
 }
 
 .hidden {
   visibility: hidden;
   opacity: 0;
-  height: 0;
+  background: transparent;
   transition: opacity 0.5s ease-in-out;
 }
 
-#getTextForm {
-  width: 70%;
+.main_contents {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  margin: auto;
-  margin-top: 0;
-  color: #ddd;
-  opacity: 0.9;
+  align-items: stretch;
 }
-
-#getTextForm>* {
-  flex: 1;
+#getTextForm {
+  width: 100%;
   display: block;
-  max-width: 100%;
-  min-width: 100%;
-  border-radius: 5px;
-  padding: 5px;
-  margin-top: 5px;
-  border: 0;
+}
+#getTextForm textarea {
+  max-width: 90%;
+  min-width: 90%;
+  display: block;
+  min-height: 10em;
+  max-height: 20em;
+  margin: 0.5rem auto;
 }
 
 #getTextForm #text {
@@ -72,67 +107,54 @@ body {
   margin-top: 0 !important;
 }
 
-#getTextForm .rate,
-#getTextForm .pitch {
+.rate,
+.pitch {
+  width: 90%;
   display: flex;
-  margin-top: 2rem;
+  align-items: center;
+  margin: 1rem auto;
+  justify-content: space-between;
 }
 
-.rate .rate-header,
-.pitch .pitch-header {
+.adjuster {
+  flex: 5;
+  margin-left: 10px;
+}
+.pitch-header,
+.rate-header {
   flex: 1;
 }
 
-#pitch,
-#rate {
-  width: 85%;
-  height: 15px;
-  background: #555;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
-  border: 0;
-  border-radius: 10px;
-  margin-right: 0;
-  cursor: pointer;
+.rate-header,
+.pitch-header {
+  flex: 1;
+  width: auto;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+}
+.rate-header > *,
+.pitch-header > * {
+  display: block;
 }
 
-/* vendor prefix (webkit)*/
-#pitch::-webkit-slider-thumb,
-#rate::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  /* -moz-appearance: none; */
-  appearance: none;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  background: #7cd198;
-  border: 0;
-  cursor: pointer;
+.rate-value,
+.pitch-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: #ccc;
+  margin-left: 10px;
 }
 
-/* vendor prefix (Moz)*/
-
-#pitch::-moz-range-thumb,
-#rate::-moz-range-thumb {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 20%;
-  width: 20px;
-  height: 20px;
-  background: #3bdce7;
-  border: 0;
-}
-
-.pitch-value,
-.rate-value {
-  padding: 8px;
-  display: inline-block;
-  text-align: center;
-  background: #3b5998;
-  border-radius: 50%;
+label {
+  font-family: Quicksand;
+  font-weight: 600;
+  font-size: 16px;
+  color: #f9f8fa;
 }
 
 #getTextForm #text {
@@ -149,9 +171,30 @@ body {
   margin-top: 10px;
   color: #ddd;
 }
+.form_footer > * {
+  display: block;
+  flex: 1;
+  margin-left: 10px;
+  padding: 0.5rem;
+}
+.form_footer {
+  padding: 0.5rem;
+  background-color: red;
+  width: 90%;
+  margin: 0.3rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_footer button {
+  border: 0;
+  font-size: 16px;
+  font-family: Quicksand;
+  font-weight: 600;
+}
 
 footer {
-
   width: 100%;
   bottom: 0;
   height: 60px;
@@ -167,4 +210,23 @@ footer .footer-container {
   margin: auto;
   color: #ccc;
   padding: 1rem 0;
+}
+
+@media screen and (max-width: 749px) {
+  main .container {
+    width: 100%;
+  }
+
+  .form_footer > * {
+    width: calc(100% / 3);
+    display: block;
+    margin-left: 10px;
+    padding: 0.5rem;
+  }
+  .main_contents {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

@@ -3,66 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="speech syntesizer, gems speech syntesizer, web speech syntesizer, text to speech, convert text to speech, speech analyzer"
+    />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>text to speech converter</title>
+    <title>Speech Syntesizer</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div id="header">
-      <h2 style="color: #4258d3">
-        Text<span style="color: palevioletred"> Converter</span>
-      </h2>
-      <p class="header-info">
-        Use this app to learn how to read text out loud. learn how to rightfully
-        pronounce words.
-      </p>
-    </div>
+    <header>
+      <div class="container">
+        <h2 class="header_title">Speech Syntesizer</h2>
+        <div class="header_description">
+          This Web app can be helpful on things like:
+          <ol type="1" start="1" class="menu">
+            <li>upload the boring writeup, it reads while you listen</li>
+            <li>Learn rightful pronounciation of words</li>
+            <li>Read other languages other than English</li>
+            <li>
+              Learn how people in different region of world pronounce certain
+              word by switching voice option
+            </li>
+            <li>Adjust different options for different experience</li>
+          </ol>
+        </div>
+      </div>
+    </header>
+
     <main>
       <div class="container">
-        <div class="animated hidden"></div>
-        <form action="" id="getTextForm" class="main">
-          <textarea
-            id="text"
-            name="text"
-            placeholder="Enter text and press speak to convert...."
-            required
-          ></textarea>
-          <div class="rate">
-            <div class="rate-header">
-              <label for="rate">Rate</label>
-              <span class="rate-value"></span>
-            </div>
-            <input
-              type="range"
-              id="rate"
-              step="0.5"
-              value="2.5"
-              min="0.5"
-              max="5"
-            />
-          </div>
-          <div class="pitch">
-            <div class="pitch-header">
-              <label for="pitch">Pitch</label>
-              <span class="pitch-value"></span>
-            </div>
-            <input
-              type="range"
-              id="pitch"
-              step="0.5"
-              value="2.5"
-              min="0.5"
-              max="5"
-            />
-          </div>
+        <div class="main_contents">
+          <div class="animated hidden"></div>
+          <form action="" id="getTextForm">
+            <textarea
+              id="text"
+              name="text"
+              placeholder="type or paste in what to read"
+            ></textarea>
 
-          <label for="selectVoice" style="text-align: center; font-size: 28px"
-            >Choose Voice</label
-          >
-          <select id="selectVoice"></select>
-          <button type="submit" id="btn-submit">Speak</button>
-        </form>
+            <div class="rate">
+              <div class="rate-header">
+                <label for="rate">Rate</label>
+                <div class="rate-value"></div>
+              </div>
+              <input
+                class="adjuster"
+                type="range"
+                id="rate"
+                step="0.5"
+                value="2"
+                min="1"
+                max="4"
+              />
+            </div>
+
+            <div class="pitch">
+              <div class="pitch-header">
+                <label for="pitch">Pitch</label>
+                <div class="pitch-value"></div>
+              </div>
+              <input
+                type="range"
+                id="pitch"
+                step="0.5"
+                value="2"
+                min="1"
+                max="4"
+                class="adjuster"
+              />
+            </div>
+            <div class="form_footer">
+              <label for="selectVoice">Choose Voice</label>
+              <select id="selectVoice"></select>
+              <button type="submit" id="btn-submit">Speak</button>
+            </div>
+          </form>
+        </div>
       </div>
     </main>
     <footer>

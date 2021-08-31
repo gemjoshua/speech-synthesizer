@@ -11,21 +11,28 @@ const rateValue = document.querySelector(".rate-value");
 const selectVoice = document.querySelector("#selectVoice");
 const btn_submit = document.getElementById("btn-submit");
 const Animated = document.querySelector(".animated");
-// init voices
-let Voices = [];
+
+/*
+========================================
+GET AVAILABLE VOICES AND POPULATED THE SELECT OPTION
+========================================
+*/
 const getVoices = () => {
   // get list of voices
-  const Voices = synth.getVoices();
-  Voices.forEach((voice) => {
+  const voiceLists = synth.getVoices();
+  voiceLists.forEach((voice) => {
     // create option element;
+    let value = `${voice.name}${voice.lang}`;
     const option = document.createElement("option");
-    option.innerText = voice.name + `(${voice.lang})`;
+    option.textContent = value;
     // set data and lang attr on option
     option.setAttribute("data-length", voice.lang);
     option.setAttribute("data-name", voice.name);
+    option.setAttribute("value", value);
     selectVoice.appendChild(option);
   });
 };
+
 // check for onvoicesChange event;
 if (synth.onvoiceschanged !== "undefined") {
   synth.onvoiceschanged = getVoices;
@@ -34,63 +41,84 @@ if (synth.onvoiceschanged !== "undefined") {
 // so it works on firefox
 getVoices();
 
-// textfield eventHandler
+/*
+==============================
+CALLED UTTER SPEACH IF ANY
+==============================
+*/
 textForm.addEventListener("submit", (e) => {
   // prevent default behaviour;
   e.preventDefault();
-  // create instance of speechUtterance;
-  const utterThis = new SpeechSynthesisUtterance(text.value);
   // validate text field
   if (!text.value) {
     return alert("Can't Speak, Text Field Is Empty");
-  } else {
-    const selectedOption = selectVoice.selectedOptions[0].getAttribute(
-      "data-name"
-    );
-    // loop on voice list
-    for (let i = 0; i < Voices.length; i++) {
-      if (Voices[i].name == selectedOption) {
-        utterThis.voice = Voices[i];
-      }
-    }
-    // check for error
-    utterThis.onerror = (err) => {
-      console.log("Internal Error: ", err);
-    };
-    // when start speaking
-    utterThis.onstart = () => {
-      btn_submit.innerText = "Speaking...";
-
-      Animated.classList.remove("hidden");
-      rate.setAttribute("disabled", "disabled");
-      pitch.setAttribute("disabled", "disabled");
-      text.setAttribute("disabled", "disabled");
-      btn_submit.setAttribute("disabled", "disabled");
-      selectVoice.setAttribute("disabled", "disabled");
-    };
-    // speak ends
-    utterThis.onend = () => {
-      Animated.classList.add("hidden");
-      console.log("done speaking");
-
-      text.removeAttribute("disabled", "disabled");
-      pitch.removeAttribute("disabled", "disabled");
-      rate.removeAttribute("disabled", "disabled");
-      btn_submit.removeAttribute("disabled", "disabled");
-      selectVoice.removeAttribute("disabled", "disabled");
-      btn_submit.innerText = "Speak";
-    };
-    // set pitch and rate
-    utterThis.pitch = pitch.value;
-    utterThis.rate = rate.value;
-    // speak
-    synth.speak(utterThis);
   }
+
+  // create instance of speechUtterance;
+  const speechUtterance = new SpeechSynthesisUtterance(text.value);
+
+  const selectedOption =
+    selectVoice.selectedOptions[0].getAttribute("data-name");
+
+  // loop on voice list
+  const voices = synth.getVoices();
+  const isMatch = voices.filter((voice) => voice.name == selectedOption);
+
+  speechUtterance.voice = isMatch[0];
+
+  // console.log(speechUtterance.voice);
+  /*
+  =========================
+  FIRES WHILE SPEAKING
+  =========================
+  */
+  speechUtterance.onstart = () => {
+    console.log("speaking");
+    btn_submit.innerText = "Speaking...";
+    Animated.classList.remove("hidden");
+    rate.setAttribute("disabled", "disabled");
+    pitch.setAttribute("disabled", "disabled");
+    text.setAttribute("disabled", "disabled");
+    btn_submit.setAttribute("disabled", "disabled");
+    selectVoice.setAttribute("disabled", "disabled");
+  };
+
+  /*
+===========================
+CALLED IF DONE SPEAKING
+==========================
+  */
+  // speak ends
+  speechUtterance.onend = () => {
+    Animated.classList.add("hidden");
+    console.log("done speaking");
+    text.removeAttribute("disabled", "disabled");
+    pitch.removeAttribute("disabled", "disabled");
+    rate.removeAttribute("disabled", "disabled");
+    btn_submit.removeAttribute("disabled", "disabled");
+    selectVoice.removeAttribute("disabled", "disabled");
+    btn_submit.innerText = "Speak";
+  };
+
+  // set pitch and rate
+  speechUtterance.pitch = pitch.value;
+  speechUtterance.rate = rate.value;
+  // speak
+  synth.speak(speechUtterance);
+  speechUtterance.onerror = (err) => {
+    alert("Something went wrong:\n", err.message);
+  };
 });
-// set default pitch and rate value
+
+/*
+=====================
+INIT PITCH VALUE
+=====================
+*/
 const trackPitchValue = () => {
   pitchValue.innerText = pitch.value;
 };
+
 const trackRateValue = () => {
   rateValue.innerText = rate.value;
 };
@@ -98,10 +126,15 @@ const trackRateValue = () => {
 trackPitchValue();
 trackRateValue();
 
-// update rate and pitch when value changes
+/*
+============================
+UPDATE PITCH VALUE
+============================
+*/
 pitch.addEventListener("change", (e) => {
   pitchValue.innerText = e.target.value;
 });
+
 rate.addEventListener("change", (e) => {
   rateValue.innerText = e.target.value;
 });
